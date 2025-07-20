@@ -1,97 +1,131 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# react-native-image-previewer
 
-# Getting Started
+实现快速的图片预览组件。
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+头部和底部组件支持自定义。
 
-## Step 1: Start Metro
+**兼容情况：**
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+​    "react": ">=19.1.0"
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+​    "react-native": ">=0.80.1"
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+本组件依赖于 `react-native-gesture-handler`和 `react-native-reanimated`
+
+> 另外值得注意的是：`react-native-reanimated`安装后需要在`babel.config.js`中增加插件配置`react-native-reanimated/plugin`，并确保在 babel 插件配置的最后一个。
+>
+> ```json
+> module.exports = {
+>   presets: ['module:@react-native/babel-preset'],
+>   plugins: ['react-native-reanimated/plugin'], // 增加此配置
+> };
+> ```
+>
+> 
+
+# 安装
+
+```shell
+npm install react_native_image_previewer react-native-gesture-handler react-native-reanimated
 ```
 
-## Step 2: Build and run your app
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
 
-### Android
+# 使用
 
-```sh
-# Using npm
-npm run android
+```tsx
+  const [visible, setVisible] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-# OR using Yarn
-yarn android
+	// 示例图片资源
+  const SAMPLE_IMAGES = [
+    { uri: 'https://picsum.photos/400/400?random=1' },
+    { uri: 'https://picsum.photos/400/400?random=2' },
+    { uri: 'https://picsum.photos/400/400?random=3' },
+    { uri: 'https://picsum.photos/400/400?random=4' },
+    { uri: 'https://picsum.photos/400/400?random=5' },
+    { uri: 'https://picsum.photos/400/400?random=6' },
+    { uri: 'https://picsum.photos/400/400?random=7' },
+    { uri: 'https://picsum.photos/400/400?random=8' },
+    { uri: 'https://picsum.photos/400/400?random=9' },
+  ];
+
+// ... 其他代码
+
+  return ( Ï
+    // ...其他代码
+    <ImagePreviewer
+        images={SAMPLE_IMAGES}
+        initialIndex={currentIndex}
+        visible={visible}
+        onClose={() => setVisible(false)}
+        backgroundColor="#000"
+        showPageIndicator={true}
+        onIndexChange={index => setCurrentIndex(index)}
+      />
+  // ...
+  )
 ```
 
-### iOS
+# 属性说明
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+比较简单，直接看类型定义吧。
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```ts
+export interface ImagePreviewerProps {
+  /**
+   * 图片URL数组
+   */
+  images: ImageSourcePropType[];
+  /**
+   * 初始显示的图片索引
+   */
+  initialIndex?: number;
+  /**
+   * 是否显示模态框
+   */
+  visible: boolean;
+  /**
+   * 关闭模态框的回调
+   */
+  onClose?: () => void;
+  /**
+   * 背景色
+   */
+  backgroundColor?: string;
+  /**
+   * 是否显示页码指示器
+   */
+  showPageIndicator?: boolean;
+  /**
+   * 自定义样式
+   */
+  style?: any;
+  /**
+   * 图片索引变化时的回调
+   */
+  onIndexChange?: (index: number) => void;
+  /**
+   * 自定义头部组件
+   */
+  renderHeader?: (props: {
+    currentIndex: number;
+    images: ImageSourcePropType[];
+    onClose?: () => void;
+  }) => React.ReactNode;
+  /**
+   * 自定义底部组件
+   */
+  renderFooter?: (props: {
+    currentIndex: number;
+    images: ImageSourcePropType[];
+  }) => React.ReactNode;
+  /**
+   * 是否显示默认关闭按钮（当自定义头部时）
+   */
+  showDefaultCloseButton?: boolean;
+}
 ```
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.

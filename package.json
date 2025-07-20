@@ -1,6 +1,6 @@
 {
   "name": "react_native_image_previewer",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "description": "A React Native image previewer component library.",
@@ -16,13 +16,13 @@
     "component",
     "library"
   ],
-  "homepage": "https://github.com/your-username/react_native_image_previewer#readme",
+  "homepage": "https://github.com/EchoNoReturn/react-native-image-previewer#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/react_native_image_previewer.git"
+    "url": "git+https://github.com/EchoNoReturn/react-native-image-previewer.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/react_native_image_previewer/issues"
+    "url": "https://github.com/EchoNoReturn/react-native-image-previewer/issues"
   },
   "license": "MIT",
   "files": [
@@ -43,8 +43,8 @@
   "peerDependencies": {
     "react": ">=19.1.0",
     "react-native": ">=0.80.1",
-    "react-native-gesture-handler": "^2.10.0",
-    "react-native-reanimated": "^3.18.0"
+    "react-native-gesture-handler": ">=2.10.0",
+    "react-native-reanimated": ">=3.18.0"
   },
   "dependencies": {},
   "devDependencies": {
@@ -69,15 +69,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "codegenConfig": {
-    "name": "react_native_image_previewer",
-    "type": "components",
-    "jsSrcsDir": "src/nativeComponents",
-    "ios": {
-      "component": {
-        "ImagePreview": "RCTImagePreview"
-      }
-    }
   }
 }
