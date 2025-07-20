@@ -1,19 +1,52 @@
 {
   "name": "react_native_image_previewer",
   "version": "0.0.1",
-  "private": true,
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "description": "A React Native image previewer component library.",
+  "author": {
+    "name": "李建国",
+    "email": "26493545485@qq.com"
+  },
+  "private": false,
+  "keywords": [
+    "react-native",
+    "image",
+    "previewer",
+    "component",
+    "library"
+  ],
+  "homepage": "https://github.com/your-username/react_native_image_previewer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/react_native_image_previewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/react_native_image_previewer/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src",
+    "README.md"
+  ],
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-native": "0.80.1",
-    "@react-native/new-app-screen": "0.80.1"
+  "peerDependencies": {
+    "react": ">=19.1.0",
+    "react-native": ">=0.80.1",
+    "react-native-gesture-handler": "^2.10.0",
+    "react-native-reanimated": "^3.18.0"
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
@@ -36,5 +69,15 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "codegenConfig": {
+    "name": "react_native_image_previewer",
+    "type": "components",
+    "jsSrcsDir": "src/nativeComponents",
+    "ios": {
+      "component": {
+        "ImagePreview": "RCTImagePreview"
+      }
+    }
   }
 }
